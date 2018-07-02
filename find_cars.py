@@ -1,5 +1,4 @@
 import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 import glob
@@ -19,7 +18,7 @@ from functions import *
 loop_num = 1 # use to find_cars function , indicate the first loop
 window_slid = [] # slid windows result
 labels = None # label function result
-last_labels = None # last labels
+last_labels = [] # last labels
 work_nums = cpu_count() # Get number of CPU to process img paralleling
 images = glob.glob('./train_data/*/*/*.png') # Get train images' filepath
 
@@ -211,14 +210,14 @@ X_scaler = joblib.load('X_scaler.joblib')
 
 
 
-def find_cars(image, skip = 8):
+def find_cars(image, skip = 8, fromvideo = True):
 
     global loop_num
     global window_slid
     global labels
     global last_labels
   
-    heat_num = 2
+    heat_num = 3
 
     if window_slid == []:
         xy_windows = [(64, 64)]
@@ -233,9 +232,6 @@ def find_cars(image, skip = 8):
         
             y_start_stop =[y_start ,  y_stop]
             window = slide_window(image, x_start_stop=[None, None], y_start_stop=y_start_stop, 
-                                #xy_window=xy_window, xy_overlap=(0.5, 0.9))
-                                #xy_window=xy_window, xy_overlap=(0.1, 0.9))
-                                #xy_window=xy_window, xy_overlap=(0.8, 0.8))
                                 xy_window=xy_window, xy_overlap=(0.6, 0.8))
 
             window_slid.extend(window)
@@ -253,10 +249,15 @@ def find_cars(image, skip = 8):
 
         heat = np.zeros_like(image[:,:,0]).astype(np.float)
 
+        hot_windows_temp = hot_windows[:]
+
         #If last labels position is not None, add it to current search_windows result
-        if not (last_labels is None):
-            hot_windows.extend(last_labels)
-            heat_num = 3 # Because hot_windows extend last labels, so increase heat threshold
+        if (last_labels) and fromvideo:
+            for temp_label in last_labels[-3:]:
+                hot_windows.extend(temp_label)
+                heat_num += 1 # Because hot_windows extend last labels, so increase heat threshold
+
+        last_labels.append(hot_windows_temp)
 
         # Add heat to each box in box list
         heat = add_heat(heat, hot_windows)
@@ -269,9 +270,6 @@ def find_cars(image, skip = 8):
         
         # Find final boxes from heatmap using label function
         labels = label(heatmap)
-
-        # Save label position on the image , use to next image
-        last_labels = get_labeled_bboxes_pos(labels)
 
     # draw label on to image
     draw_img = draw_labeled_bboxes(np.copy(image), labels)
@@ -287,12 +285,12 @@ def find_cars(image, skip = 8):
 
 
 #Address test_images
- images = os.listdir("test_images/")
- for i in range(len(images)):
-     image = mpimg.imread('test_images/' + images[i])
-     print(images[i])
-     img = find_cars(image, skip = 1)
-     mpimg.imsave('output_images/' + images[i], img)
+#images = os.listdir("test_images/")
+#for i in range(len(images)):
+#    image = mpimg.imread('test_images/' + images[i])
+#    print(images[i])
+#    img = find_cars(image, skip = 1, fromvideo = False)
+#    mpimg.imsave('output_images/' + images[i], img)
 
 
 
@@ -304,40 +302,3 @@ white_clip.write_videofile(white_output, audio=False)
 
 
 
-#Debug code
-'''
-
-i = 3
-
-if i == 1:
-    tempfilename = 'test4.jpg'
-    image = mpimg.imread('test_images/' + tempfilename)
-    print(tempfilename)
-    img = find_cars(image)
-    mpimg.imsave('output_images/' + tempfilename, img)
-
-
-if i == 2:
-    images = os.listdir("test_images/")
-    for i in range(len(images)):
-        image = mpimg.imread('test_images/' + images[i])
-        print(images[i])
-        img = find_cars(image)
-        mpimg.imsave('output_images/' + images[i], img)
-        
-    
-if i == 3:        
-    white_output = 'output_videos/test_video.mp4'
-    clip1 = VideoFileClip("test_video.mp4")
-    white_clip = clip1.fl_image(find_cars) 
-    white_clip.write_videofile(white_output, audio=False)
-
-
-if i == 4: 
-    white_output = 'output_videos/project_video.mp4'
-    clip1 = VideoFileClip("project_video.mp4")
-    white_clip = clip1.fl_image(find_cars) 
-    white_clip.write_videofile(white_output, audio=False)
-
-
-'''
