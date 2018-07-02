@@ -67,7 +67,6 @@ I then explored different color spaces and different `skimage.hog()` parameters 
 Here is an example using the `RGB` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
-![alt text][image2]
 
 <div class="test">
 Car:
@@ -191,7 +190,6 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ### Here are six frames and their corresponding heatmaps:
 
-![alt text][image5]
 <div class="test">
 <img src="output_images/test_hotwindows1.jpg" width="300" />
 <img src="output_images/test_heatmap1.jpg" width="300" />
