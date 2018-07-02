@@ -43,7 +43,7 @@ Download Link:
 
 After download, uncompress data to ./train_data directory, The DirTree like:
 <div class="test">
-<img src="output_images/dirtree.png" width="600" />
+<img src="output_images/dirtree.png" width="300" />
 </div>
 
 
@@ -80,6 +80,8 @@ Car:
 <img src="output_images/car-R-hot.jpg" width="200" />
 <img src="output_images/car-G-hot.jpg" width="200" />
 <img src="output_images/car-B-hot.jpg" width="200" />
+</br>
+</br>
 NotCar:
 </br>
 <img src="output_images/notcar.png" width="200" />
@@ -93,7 +95,7 @@ NotCar:
 <img src="output_images/notcar-B-hot.jpg" width="200" />
 </div>
 
-#### 2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Settled on the final choice of HOG parameters.
 
 I only tried various combinations of parameters:
 
