@@ -43,7 +43,7 @@ Download Link:
 
 After download, uncompress data to ./train_data directory, The DirTree like:
 <div class="test">
-<img src="output_images/dirtree.jpg" width="600" />
+<img src="output_images/dirtree.png" width="600" />
 </div>
 
 
@@ -71,15 +71,27 @@ Here is an example using the `RGB` color space and HOG parameters of `orientatio
 
 <div class="test">
 Car:
+</br>
 <img src="output_images/car.png" width="200" />
 <img src="output_images/car-R.jpg" width="200" />
 <img src="output_images/car-G.jpg" width="200" />
 <img src="output_images/car-B.jpg" width="200" />
 </br>
-<img src="output_images/car-hot.png" width="200" />
+<img src="output_images/car-hot.jpg" width="200" />
 <img src="output_images/car-R-hot.jpg" width="200" />
 <img src="output_images/car-G-hot.jpg" width="200" />
 <img src="output_images/car-B-hot.jpg" width="200" />
+NotCar:
+</br>
+<img src="output_images/notcar.png" width="200" />
+<img src="output_images/notcar-R.jpg" width="200" />
+<img src="output_images/notcar-G.jpg" width="200" />
+<img src="output_images/notcar-B.jpg" width="200" />
+</br>
+<img src="output_images/notcar-hot.jpg" width="200" />
+<img src="output_images/notcar-R-hot.jpg" width="200" />
+<img src="output_images/notcar-G-hot.jpg" width="200" />
+<img src="output_images/notcar-B-hot.jpg" width="200" />
 </div>
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
@@ -114,14 +126,23 @@ Sliding window parameters I chose:
 | xy_overlap       | (0.6, 0.8)      |
 
 
-![alt text][image3]
+<div class="test">
+<img src="output_images/test_slidewindows1.jpg" width="600" />
+</div>
 
 #### 2. Pipeline:
 
 Ultimately I searched on two scales using RGB 0-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
-![alt text][image4]
-
+<div class="test">
+<img src="output_images/test1.jpg" width="200" />
+<img src="output_images/test2.jpg" width="200" />
+<img src="output_images/test3.jpg" width="200" />
+</br>
+<img src="output_images/test4.jpg" width="200" />
+<img src="output_images/test5.jpg" width="200" />
+<img src="output_images/test6.jpg" width="200" />
+</div>
 
 Use multiprocessing to improve the performance of classifier:
 ```
@@ -161,7 +182,7 @@ Use multiprocessing to improve the performance of classifier:
 ### Video Implementation
 
 #### 1. A link to the final video output:
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output_videos/project_video.mp4)
 
 
 #### 2. Implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
@@ -171,13 +192,36 @@ Here's an example result showing the heatmap from a series of frames of video, t
 ### Here are six frames and their corresponding heatmaps:
 
 ![alt text][image5]
-
+<div class="test">
+<img src="output_images/test_hotwindows1.jpg" width="300" />
+<img src="output_images/test_heatmap1.jpg" width="300" />
+</br>
+<img src="output_images/test_hotwindows2.jpg" width="300" />
+<img src="output_images/test_heatmap2.jpg" width="300" />
+</br>
+<img src="output_images/test_hotwindows3.jpg" width="300" />
+<img src="output_images/test_heatmap3.jpg" width="300" />
+</br>
+<img src="output_images/test_hotwindows4.jpg" width="300" />
+<img src="output_images/test_heatmap4.jpg" width="300" />
+</br>
+<img src="output_images/test_hotwindows5.jpg" width="300" />
+<img src="output_images/test_heatmap5.jpg" width="300" />
+</br>
+<img src="output_images/test_hotwindows6.jpg" width="300" />
+<img src="output_images/test_heatmap6.jpg" width="300" />
+</br>
+</div>
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+
+<div class="test">
+<img src="output_images/test_labels1.jpg" width="600" />
+</div>
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
+<div class="test">
+<img src="output_images/test6.jpg" width="600" />
+</div>
 
 
 ---
