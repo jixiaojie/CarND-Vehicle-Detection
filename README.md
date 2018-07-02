@@ -42,31 +42,8 @@ Download Link:
 </div>
 
 After download, uncompress data to ./train_data directory, The DirTree like:
-
-.
-├── non-vehicles
-│   ├── Extras
-│   ├── Far
-│   ├── GTI
-│   ├── Left
-│   ├── MiddleClose
-│   └── Right
-└── vehicles
-    ├── Far
-    ├── GTI_Far
-    ├── GTI_Left
-    ├── GTI_MiddleClose
-    ├── GTI_Right
-    ├── KITTI_extracted
-    ├── Left
-    ├── MiddleClose
-    └── Right
-
-
-如果显示不了tree ,解图放这里
 <div class="test">
-<img src="output_images/calibration_distort.jpg" width="300" />
-<img src="output_images/calibration_undistort.jpg" width="300" />
+<img src="output_images/dirtree.jpg" width="600" />
 </div>
 
 
@@ -79,7 +56,11 @@ The code for this step is contained in lines 9 - 29 of the file called `function
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-![alt text][image1]
+<div class="test">
+<img src="output_images/car.png" width="300" />
+<img src="output_images/notcar.png" width="300" />
+</div>
+
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
@@ -87,6 +68,19 @@ Here is an example using the `RGB` color space and HOG parameters of `orientatio
 
 
 ![alt text][image2]
+
+<div class="test">
+Car:
+<img src="output_images/car.png" width="200" />
+<img src="output_images/car-R.jpg" width="200" />
+<img src="output_images/car-G.jpg" width="200" />
+<img src="output_images/car-B.jpg" width="200" />
+</br>
+<img src="output_images/car-hot.png" width="200" />
+<img src="output_images/car-R-hot.jpg" width="200" />
+<img src="output_images/car-G-hot.jpg" width="200" />
+<img src="output_images/car-B-hot.jpg" width="200" />
+</div>
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
